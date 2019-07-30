@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>The MineCraft Server loginpage</h2>
+
+<p id="demo">Enter your account and password.</p>
+
+<input type="text" id="account" />
+<input type="password" id="password" />
+<button type="button" onclick="loadDoc()">Submit</button>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+      window.location.href='/loginOK';
+    }else{
+      window.location.href='/loginpage';
+    }
+  };
+  xhttp.open("POST", "/login", true);
+  xhttp.send(`{"account":"${document.getElementById("account").value}", "password":"${document.getElementById("password").value}"}`);
+  window.location.href='/loginOK';
+}
+</script>
+
+</body>
+</html>
